@@ -5,6 +5,7 @@
  */
 package br.umc.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -14,12 +15,15 @@ import java.util.Objects;
 public class Account {
     private String accountNumber;
     private String pinNumber;
+    private BigDecimal value;
     
     public Account() {}
     
-    public Account(final String accountNumber, final String pinNumber) {
+    public Account(final String accountNumber, final String pinNumber, 
+            final BigDecimal value) {
         this.accountNumber = accountNumber;
         this.pinNumber = pinNumber;
+        this.value = value;
     }
     
     /**
@@ -34,7 +38,7 @@ public class Account {
      * Método que define o número da conta.
      * @param accountNumber Número da conta
      */
-    public void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(final String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -50,7 +54,7 @@ public class Account {
      * Método que define o PIM da conta
      * @param pinNumber PIM da conta
      */
-    public void setPinNumber(String pinNumber) {
+    public void setPinNumber(final String pinNumber) {
         this.pinNumber = pinNumber;
     }
 
@@ -63,7 +67,7 @@ public class Account {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

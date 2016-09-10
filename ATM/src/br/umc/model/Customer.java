@@ -5,14 +5,13 @@ package br.umc.model;
  * @author leonardolopes
  */
 public class Customer {
-    
     private Long id;
     private String name;
     private Account account;
     
     public Customer(){}
     
-    public Customer (Long id, String name, Account account)
+    public Customer (final Long id, final String name, final Account account)
     {
         this.id = id;
         this.name = name;
@@ -31,7 +30,7 @@ public class Customer {
      * Método que define o ID do usuário
      * @param id O ID do usuário
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -47,7 +46,7 @@ public class Customer {
      * Método que define o nome do usuário
      * @param name Nome do usuário
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -63,10 +62,7 @@ public class Customer {
      * Método que vai definir a conta
      * @param account Conta 
      */
-    public void setAccount(Account account) {
+    public void setAccount(final Account account) {
         this.account = account;
     }
-   
-    
-    
 }
