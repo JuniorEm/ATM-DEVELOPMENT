@@ -37,7 +37,7 @@ public class AtmView {
 			account = requestAndVerifyPinAndAccountNumber();
 			
 			if (account == null) {
-				AtmUtil.showMessage("Número da conta/pin inválido");
+				AtmUtil.showMessage("Numero da conta/pin invalido");
 				navigate();
 			}
 			else openMenu();
@@ -47,9 +47,9 @@ public class AtmView {
 	}
 	
 	private Account requestAndVerifyPinAndAccountNumber() throws IOException {
-		AtmUtil.showMessage("Insira o número da sua conta: ");
+		AtmUtil.showMessage("Insira o numero da sua conta: ");
 		final String accountNumber = buffered.readLine();
-		AtmUtil.showMessage("Insira o número do pin: ");
+		AtmUtil.showMessage("Insira o numero do pin: ");
 		final String pinNumber = buffered.readLine();
 		final Account account = new Account(accountNumber, pinNumber);
 		return controller.verifyCustomerAccount(account);
@@ -77,7 +77,7 @@ public class AtmView {
 	}
 	
 	private void showInvalidOptionMessage() {
-		AtmUtil.showMessage("OPÇÃO INVÁLIDA");
+		AtmUtil.showMessage("OPCAO INVALIDA");
 	}
 	
 	private String buildMenu() {
@@ -85,12 +85,12 @@ public class AtmView {
 		.append("\n---------------- MENU --------------")
 		.append("\n1 - CONSULTA DE SALDO")
 		.append("\n2 - SAQUE")
-		.append("\n3 - DEPÓSITO")
+		.append("\n3 - DEPOSITO")
 		.append("\n4 - SAIR").toString();
 	}
 	
 	private void showBalance() {
-		System.out.println(new StringBuilder("O seu saldo é de: R$").append(executeConsultOperation())
+		System.out.println(new StringBuilder("O seu saldo e de: R$").append(executeConsultOperation())
 				.append("\nPara sair digite 4, para voltar digite 6").toString());
 		try {
 			requestOption();
@@ -121,7 +121,7 @@ public class AtmView {
 				.append("------------ Withdrawal Menu ---------")
 				.append("\n1 - R$20").append("\t4 - R$100")
 				.append("\n2 - R$40").append("\t5 - R$200")
-				.append("\n3 - R$60").append("\t6 - CANCELAR TRANSAÇÃO")
+				.append("\n3 - R$60").append("\t6 - CANCELAR TRANSACAO")
 				.append("\nEscolha uma quantia de saque: ").toString());
 		
 		try {
@@ -159,7 +159,7 @@ public class AtmView {
 	
 	private void verifyWithDraw(final String value) {
 		if (value.equals("1")) {
-			AtmUtil.showMessage("O caixa eletrônico está com poucas cédulas no momento, digite um valor menor");
+			AtmUtil.showMessage("O caixa eletronico esta com poucas cedulas no momento, digite um valor menor");
 			buildWithDrawScreen();
 		} else if (value.equals("2")) {
 			AtmUtil.showMessage("Saldo insuficiente, digite um valor abaixo");

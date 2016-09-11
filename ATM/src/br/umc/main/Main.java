@@ -8,7 +8,7 @@ package br.umc.main;
 import br.umc.view.AtmView;
 
 /**
- * Classe que representa o método Main.
+ * Classe que representa o metodo Main.
  * @author 12141100859
  */
 public class Main {

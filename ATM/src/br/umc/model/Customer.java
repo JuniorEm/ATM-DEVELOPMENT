@@ -16,32 +16,32 @@ public class Customer {
     }
 
     /**
-     * Método que retorna o ID do usuário
-     * @return O ID do usuário
+     * Metodo que retorna o ID do usuario
+     * @return O ID do usuario
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Método que define o ID do usuário
-     * @param id O ID do usuário
+     * Metodo que define o ID do usuario
+     * @param id O ID do usuario
      */
     public void setId(final Long id) {
         this.id = id;
     }
 
     /**
-     * Método que retorna o nome do usuário
-     * @return O nome do usuário
+     * Metodo que retorna o nome do usuario
+     * @return O nome do usuario
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Método que define o nome do usuário
-     * @param name Nome do usuário
+     * Metodo que define o nome do usuario
+     * @param name Nome do usuario
      */
     public void setName(final String name) {
         this.name = name;
