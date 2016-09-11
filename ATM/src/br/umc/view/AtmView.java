@@ -33,7 +33,7 @@ public class AtmView {
 			account = requestAndVerifyPinAndAccountNumber();
 			
 			if (account == null) {
-				AtmUtil.showMessage("Número da conta inválido");
+				AtmUtil.showMessage("Número da conta/pin inválido");
 				navigate();
 			}
 			else openMenu();
@@ -60,7 +60,19 @@ public class AtmView {
 			showBalance();
 		} else if (option.equals(OptionEnum.WITHDRAW.getCode())) {
 			buildWithDrawScreen();
+		} else if (option.equals(OptionEnum.DEPOSIT.getCode())) {
+			buildDepositScreen();
+		} else if (option.equals(OptionEnum.EXIT.getCode())) {
+			System.exit(0);
+		} else {
+			showInvalidOptionMessage();
+			openMenu();
 		}
+
+	}
+	
+	private void showInvalidOptionMessage() {
+		AtmUtil.showMessage("OPÇÃO INVÁLIDA");
 	}
 	
 	private String buildMenu() {
@@ -90,7 +102,7 @@ public class AtmView {
 		else if (option.equals(OptionEnum.BACK.getCode()))
 			openMenu();
 		else {
-			AtmUtil.showMessage("OPÇÃO INVÁLIDA, TENTE NOVAMENTE");
+			showInvalidOptionMessage();
 			requestOption();
 		}
 	}
@@ -130,7 +142,7 @@ public class AtmView {
 			final BigDecimal value = map.get(option);
 			
 			if (value == null) {
-				AtmUtil.showMessage("OPÇÃO INVÁLIDA, TENTE NOVAMENTE");
+				showInvalidOptionMessage();
 				withDraw();
 			} else {
 				final String result = controller.withDraw(account, value);

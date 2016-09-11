@@ -15,6 +15,7 @@ public class AtmDAO implements AtmOperation {
 	public AtmDAO() {
 		atm = new Atm();
 	}
+	
     /**
      * Verifica se a conta do cliente bate com o que possui no Banco de Dados e retorna o
      * respectivo objeto.
@@ -36,6 +37,7 @@ public class AtmDAO implements AtmOperation {
 	public String withDraw(final Account account, final BigDecimal value) {
 		if (verifyCustomerBalance(account, value) && verifyAtmBalance(value)) {
 			account.setBalance(account.getBalance().subtract(value));
+			atm.setCurrentBalance(atm.getCurrentBalance().subtract(value));
 			return "0";
 		} else if (verifyCustomerBalance(account, value)) {
 			return "1";

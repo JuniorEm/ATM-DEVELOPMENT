@@ -12,4 +12,8 @@ public class Atm {
 	public BigDecimal getCurrentBalance() {
 		return currentBalance;
 	}
+	
+	public void setCurrentBalance(final BigDecimal currentBalance) {
+		this.currentBalance = currentBalance;
+	}
 }
