@@ -15,17 +15,21 @@ import java.util.Objects;
 public class Account {
     private String accountNumber;
     private String pinNumber;
+    private Customer customer;
     private BigDecimal value;
     
     public Account() {}
     
-    public Account(final String accountNumber, final String pinNumber, 
-            final BigDecimal value) {
-        this.accountNumber = accountNumber;
-        this.pinNumber = pinNumber;
-        this.value = value;
+    public Account(final String accountNumber, final String pinNumber) {
+    	this.accountNumber = accountNumber;
+    	this.pinNumber = pinNumber;
     }
     
+    public Account(final String accountNumber, final String pinNumber, final Customer customer) {
+    	this(accountNumber, pinNumber);
+    	this.customer = customer;
+    }
+         
     /**
      * Método que retorna o número da conta.
      * @return O número da conta.
@@ -57,7 +61,23 @@ public class Account {
     public void setPinNumber(final String pinNumber) {
         this.pinNumber = pinNumber;
     }
-
+    
+    /**
+     * Getter para Customer.
+     * @return O objeto Customer.
+     */
+    public Customer getCustomer() {
+    	return customer;
+    }
+    
+    /**
+     * Setter para Customer.
+     * @param customer O novo objeto Customer.
+     */
+    public void setCustomer(final Customer customer) {
+    	this.customer = customer;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

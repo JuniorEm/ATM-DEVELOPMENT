@@ -7,15 +7,12 @@ package br.umc.model;
 public class Customer {
     private Long id;
     private String name;
-    private Account account;
     
     public Customer(){}
     
-    public Customer (final Long id, final String name, final Account account)
-    {
+    public Customer (final Long id, final String name) {
         this.id = id;
         this.name = name;
-        this.account = account;
     }
 
     /**
@@ -48,21 +45,5 @@ public class Customer {
      */
     public void setName(final String name) {
         this.name = name;
-    }
-
-    /**
-     * Método que retorna a conta
-     * @return Retorna a conta
-     */
-    public Account getAccount() {
-        return account;
-    }
-
-    /**
-     * Método que vai definir a conta
-     * @param account Conta 
-     */
-    public void setAccount(final Account account) {
-        this.account = account;
     }
 }

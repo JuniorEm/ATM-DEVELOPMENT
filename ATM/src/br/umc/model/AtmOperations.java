@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 public interface AtmOperations {
     
-    boolean verifyCustomerAccount(final Account account);
+    Account verifyCustomerAccount(final Account account);
     void withDraw(final BigDecimal value);
     void consult();
     void deposit();
