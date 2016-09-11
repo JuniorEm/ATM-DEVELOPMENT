@@ -10,12 +10,16 @@ import br.umc.controller.AtmController;
 import br.umc.io.factory.BufferedReaderFactory;
 import br.umc.model.Account;
 import br.umc.util.AtmUtil;
-import br.umc.view.option.OptionEnum;
 
 public class AtmView {
 	private Account account;
 	private AtmController controller;
 	private BufferedReader buffered;
+	private static final String CONSULT = "1";
+	private static final String WITHDRAW = "2";
+	private static final String DEPOSIT = "3";
+	private static final String EXIT = "4";
+	private static final String BACK = "6";
 	
 	public AtmView() {
 		controller = new AtmController();
@@ -56,17 +60,18 @@ public class AtmView {
 		final String option = buffered.readLine();
 		String screen = null;
 		
-		if (option.equals(OptionEnum.CONSULT.getCode())) {
-			showBalance();
-		} else if (option.equals(OptionEnum.WITHDRAW.getCode())) {
-			buildWithDrawScreen();
-		} else if (option.equals(OptionEnum.DEPOSIT.getCode())) {
-			buildDepositScreen();
-		} else if (option.equals(OptionEnum.EXIT.getCode())) {
-			System.exit(0);
-		} else {
-			showInvalidOptionMessage();
-			openMenu();
+		switch(option) {
+			case CONSULT: showBalance();
+			break;
+			case WITHDRAW: buildWithDrawScreen();
+			break;
+			case DEPOSIT: buildDepositScreen();
+			break;
+			case EXIT: System.exit(0);
+			break;
+			default: { showInvalidOptionMessage();
+						openMenu();
+			}
 		}
 
 	}
@@ -97,9 +102,9 @@ public class AtmView {
 	private void requestOption() throws IOException {
 		final String option = buffered.readLine();
 		
-		if (option.equals(OptionEnum.EXIT.getCode()))
+		if (option.equals(EXIT))
 				System.exit(0);
-		else if (option.equals(OptionEnum.BACK.getCode()))
+		else if (option.equals(BACK))
 			openMenu();
 		else {
 			showInvalidOptionMessage();
@@ -136,7 +141,7 @@ public class AtmView {
 		
 		final String option = buffered.readLine();
 		
-		if (option.equals("6")) {
+		if (option.equals(BACK)) {
 			openMenu();
 		} else {
 			final BigDecimal value = map.get(option);
