@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * Classe que representa a conta de um usuário no banco
+ * Classe que representa a conta de um usuario no banco
  * @author leonardolopes
  */
 public class Account {
@@ -32,23 +32,23 @@ public class Account {
     }
          
     /**
-     * Método que retorna o número da conta.
-     * @return O número da conta.
+     * Metodo que retorna o numero da conta.
+     * @return O numero da conta.
      */
     public String getAccountNumber() {
         return accountNumber;
     }
 
     /**
-     * Método que define o número da conta.
-     * @param accountNumber Número da conta
+     * Metodo que define o numero da conta.
+     * @param accountNumber Numero da conta
      */
     public void setAccountNumber(final String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
     /**
-     * Método que retorna o PIM da conta
+     * Metodo que retorna o PIM da conta
      * @return PIM da conta
      */
     public String getPinNumber() {
@@ -56,7 +56,7 @@ public class Account {
     }
 
     /**
-     * Método que define o PIM da conta
+     * Metodo que define o PIM da conta
      * @param pinNumber PIM da conta
      */
     public void setPinNumber(final String pinNumber) {
@@ -89,7 +89,7 @@ public class Account {
     
     /**
      * Setter para saldo da conta.
-     * @param balance O par�metro novo saldo.
+     * @param balance O parametro novo saldo.
      */
     public void setBalance(final BigDecimal balance) {
     	this.balance = balance;
