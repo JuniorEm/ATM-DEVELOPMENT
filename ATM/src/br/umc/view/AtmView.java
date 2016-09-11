@@ -12,13 +12,44 @@ import br.umc.model.Account;
 import br.umc.util.AtmUtil;
 
 public class AtmView {
+	/**
+	 * Um objeto conta.
+	 */
 	private Account account;
+	
+	/**
+	 * Um objeto controller.
+	 */
 	private AtmController controller;
+	
+	/**
+	 * BufferedReader para entrada de dados.
+	 */
 	private BufferedReader buffered;
+	
+	/**
+	 * Opcao para consulta.
+	 */
 	private static final String CONSULT = "1";
+	
+	/**
+	 * Opcao para saque.
+	 */
 	private static final String WITHDRAW = "2";
+	
+	/**
+	 * Opcao para deposito.
+	 */
 	private static final String DEPOSIT = "3";
+	
+	/**
+	 * Opcao para saida.
+	 */
 	private static final String EXIT = "4";
+	
+	/**
+	 * Opcao para voltar.
+	 */
 	private static final String BACK = "6";
 	
 	public AtmView() {
@@ -27,11 +58,17 @@ public class AtmView {
 		account = new Account();
 	}
 	
+	/**
+	 * Metodo responsavel por dar inicio ao sistema.
+	 */
 	public void openTerminal() {
 		AtmUtil.showMessage("Bem vindo");
 		navigate();
 	}
 	
+	/**
+	 * Metodo responsavel por efetuar a navegacao do sistema.
+	 */
 	private void navigate() {
 		try {
 			account = requestAndVerifyPinAndAccountNumber();
@@ -46,6 +83,11 @@ public class AtmView {
 		}
 	}
 	
+	/**
+	 * Verifica o numero da conta e o numero do pin.
+	 * @return O objeto conta.
+	 * @throws IOException Um erro lançado pelo uso do BufferedReader.
+	 */
 	private Account requestAndVerifyPinAndAccountNumber() throws IOException {
 		AtmUtil.showMessage("Insira o numero da sua conta: ");
 		final String accountNumber = buffered.readLine();
@@ -55,31 +97,46 @@ public class AtmView {
 		return controller.verifyCustomerAccount(account);
 	}
 	
+	/**
+	 * Abre o menu.
+	 * @throws IOException Erro lançado pelo uso do BufferedReader.
+	 */
 	private void openMenu() throws IOException {
 		System.out.println(buildMenu());
 		final String option = buffered.readLine();
 		String screen = null;
 		
-		switch(option) {
-			case CONSULT: showBalance();
+		switch (option) {
+		case CONSULT:
+			showBalance();
 			break;
-			case WITHDRAW: buildWithDrawScreen();
+		case WITHDRAW:
+			buildWithDrawScreen();
 			break;
-			case DEPOSIT: buildDepositScreen();
+		case DEPOSIT:
+			buildDepositScreen();
 			break;
-			case EXIT: System.exit(0);
+		case EXIT:
+			System.exit(0);
 			break;
-			default: { showInvalidOptionMessage();
-						openMenu();
-			}
+		default: {
+			showInvalidOptionMessage();
+			openMenu();
 		}
-
+		}
 	}
 	
+	/**
+	 * Metodo que exibe uma mensagem de opcao invalida.
+	 */
 	private void showInvalidOptionMessage() {
 		AtmUtil.showMessage("OPCAO INVALIDA");
 	}
 	
+	/**
+	 * Constroi a tela de menu.
+	 * @return O menu construido.
+	 */
 	private String buildMenu() {
 		return new StringBuilder()
 		.append("\n---------------- MENU --------------")
@@ -89,6 +146,9 @@ public class AtmView {
 		.append("\n4 - SAIR").toString();
 	}
 	
+	/**
+	 * Mostra o saldo do individuo.
+	 */
 	private void showBalance() {
 		System.out.println(new StringBuilder("O seu saldo e de: R$").append(executeConsultOperation())
 				.append("\nPara sair digite 4, para voltar digite 6").toString());
@@ -99,6 +159,10 @@ public class AtmView {
 		}
 	}
 	
+	/**
+	 * Metodo que pergunta se o usuario deseja sair ou continuar.
+	 * @throws IOException
+	 */
 	private void requestOption() throws IOException {
 		final String option = buffered.readLine();
 		
@@ -112,10 +176,17 @@ public class AtmView {
 		}
 	}
 	
+	/**
+	 * Executa a operacao de consulta.
+	 * @return O valor da conta do individuo.
+	 */
 	private BigDecimal executeConsultOperation() {
 		return controller.consult(account);
 	}
 	
+	/**
+	 * Constroi a tela de saque.
+	 */
 	private void buildWithDrawScreen() {
 		System.out.println(new StringBuilder()
 				.append("------------ Withdrawal Menu ---------")
@@ -131,6 +202,10 @@ public class AtmView {
 		}
 	}
 	
+	/**
+	 * Implementa a lógica de saque.
+	 * @throws IOException Uma exceção do BufferedReader.
+	 */
 	private void withDraw() throws IOException {
 		final Map<String, BigDecimal> map = new HashMap<>();
 		map.put("1", new BigDecimal("20"));
@@ -151,24 +226,59 @@ public class AtmView {
 				withDraw();
 			} else {
 				final String result = controller.withDraw(account, value);
-				verifyWithDraw(result);
+				if (verifyWithDraw(result))
+					AtmUtil.showMessage("Saque realizado com sucesso, não esqueça de retirar o seu dinheiro!");
 				openMenu();
 			}
 		}
 	}
 	
-	private void verifyWithDraw(final String value) {
+	/**
+	 * Verifica se o individuo esta apto para saque.
+	 * @param value O valor da operacao.
+	 * @return Um booleano.
+	 */
+	private boolean verifyWithDraw(final String value) {
 		if (value.equals("1")) {
 			AtmUtil.showMessage("O caixa eletronico esta com poucas cedulas no momento, digite um valor menor");
 			buildWithDrawScreen();
+			return false;
 		} else if (value.equals("2")) {
 			AtmUtil.showMessage("Saldo insuficiente, digite um valor abaixo");
 			buildWithDrawScreen();
+			return false;
 		}
+		return true;
 	}
 		
-	private String buildDepositScreen() {
-		return null;
+	/**
+	 * Constroi a tela de deposito.
+	 */
+	private void buildDepositScreen() {
+		System.out.println(new StringBuilder().append("---------DEPOSIT MENU------")
+		.append("\nDigite o valor que deseja depositar ou digite 6 para cancelar"));
+		
+		try {
+			deposit();
+		} catch(final Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
+	/**
+	 * Metodo que realiza o deposito e sua logica.
+	 * @throws IOException BufferedReader pode disparar uma excecao de valor invalido.
+	 */
+	private void deposit() throws IOException {
+		final String option = buffered.readLine();
+		
+		if (option.equals(BACK))
+			openMenu();
+		else {
+			final BigDecimal value = new BigDecimal(option);
+			controller.deposit(account, value);
+			AtmUtil.showMessage("Valor depositado com sucesso!");
+			openMenu();
+		}
+	}
 }

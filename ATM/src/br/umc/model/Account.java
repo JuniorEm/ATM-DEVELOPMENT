@@ -11,6 +11,7 @@ import java.util.Objects;
 /**
  * Classe que representa a conta de um usuario no banco
  * @author leonardolopes
+ * 
  */
 public class Account {
     private String accountNumber;

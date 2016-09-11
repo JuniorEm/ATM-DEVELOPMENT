@@ -17,6 +17,7 @@ public class AtmData {
 		for (int i = 0; i < 15; i++) {
 			customers.add(new Customer(new Long(i), "Cliente de numero " + i));
 			accounts.add(new Account("21" + i + "2" + i, "12" + i));
+			accounts.get(i).setCustomer(customers.get(i));
 		}
 	}
 	
