@@ -1,4 +1,4 @@
-package br.com.data;
+package br.umc.data;
 
 import java.util.ArrayList;
 import java.util.List;

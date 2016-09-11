@@ -1,6 +1,6 @@
 package br.umc.controller;
 
-import br.com.dao.AtmDAO;
+import br.umc.dao.AtmDAO;
 import br.umc.model.Account;
 
 public class AtmController {

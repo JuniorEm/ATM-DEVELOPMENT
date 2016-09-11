@@ -1,9 +1,9 @@
-package br.com.dao;
+package br.umc.dao;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import br.com.data.AtmData;
+import br.umc.data.AtmData;
 import br.umc.model.Account;
 import br.umc.model.AtmOperations;
 
