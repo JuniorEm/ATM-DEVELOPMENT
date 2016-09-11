@@ -16,13 +16,14 @@ public class Account {
     private String accountNumber;
     private String pinNumber;
     private Customer customer;
-    private BigDecimal value;
+    private BigDecimal balance;
     
     public Account() {}
     
     public Account(final String accountNumber, final String pinNumber) {
     	this.accountNumber = accountNumber;
     	this.pinNumber = pinNumber;
+    	this.balance = new BigDecimal("1000");
     }
     
     public Account(final String accountNumber, final String pinNumber, final Customer customer) {
@@ -76,6 +77,22 @@ public class Account {
      */
     public void setCustomer(final Customer customer) {
     	this.customer = customer;
+    }
+    
+    /**
+     * Getter para o saldo da conta.
+     * @return O objeto com o valor atrelado.
+     */
+    public BigDecimal getBalance() {
+    	return balance;
+    }
+    
+    /**
+     * Setter para saldo da conta.
+     * @param balance O parâmetro novo saldo.
+     */
+    public void setBalance(final BigDecimal balance) {
+    	this.balance = balance;
     }
     
     @Override

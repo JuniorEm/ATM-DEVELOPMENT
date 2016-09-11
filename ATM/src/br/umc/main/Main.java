@@ -8,7 +8,7 @@ package br.umc.main;
 import br.umc.view.AtmView;
 
 /**
- *
+ * Classe que representa o método Main.
  * @author 12141100859
  */
 public class Main {
@@ -17,9 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         new AtmView().openTerminal();
-       
     }
     
 }

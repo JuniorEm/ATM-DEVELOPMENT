@@ -11,10 +11,16 @@ import java.math.BigDecimal;
  *
  * @author 12141100859
  */
-public interface AtmOperations {
+public interface AtmOperation {
     
     Account verifyCustomerAccount(final Account account);
-    void withDraw(final BigDecimal value);
-    void consult();
-    void deposit();
+    
+    String withDraw(final Account account, final BigDecimal value);
+    
+    default BigDecimal consult(final Account account) {
+    	final Account obtained = verifyCustomerAccount(account);
+    	return obtained.getBalance();
+    }
+    
+    void deposit(final Account account, final BigDecimal value);
 }
