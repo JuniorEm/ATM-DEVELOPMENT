@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.umc.model;
+package br.umc.entity;
 
 import java.math.BigDecimal;
 
@@ -11,16 +11,13 @@ import java.math.BigDecimal;
  *
  * @author 12141100859
  */
-public interface AtmOperation {
+public interface AccountOperation {
     
     Account verifyCustomerAccount(final Account account);
     
     String withDraw(final Account account, final BigDecimal value);
     
-    default BigDecimal consult(final Account account) {
-    	final Account obtained = verifyCustomerAccount(account);
-    	return obtained.getBalance();
-    }
+    BigDecimal consult(final Account account);
     
     void deposit(final Account account, final BigDecimal value);
 }

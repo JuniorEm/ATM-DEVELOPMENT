@@ -6,22 +6,27 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.umc.controller.AtmController;
+import br.umc.dao.AccountDAO;
 import br.umc.io.factory.BufferedReaderFactory;
-import br.umc.model.Account;
+import br.umc.entity.Account;
 import br.umc.util.AtmUtil;
 
+/**
+ * Tela do ATM.
+ * @author 12141500872
+ */
 public class AtmView {
+    
 	/**
 	 * Um objeto conta.
 	 */
 	private Account account;
 	
-	/**
-	 * Um objeto controller.
-	 */
-	private AtmController controller;
-	
+        /**
+         * Data Access Object de Account.
+         */
+        private AccountDAO dao;
+        
 	/**
 	 * BufferedReader para entrada de dados.
 	 */
@@ -53,7 +58,7 @@ public class AtmView {
 	private static final String BACK = "6";
 	
 	public AtmView() {
-		controller = new AtmController();
+                dao = new AccountDAO();
 		buffered = new BufferedReaderFactory().getBufferedReader();
 		account = new Account();
 	}
@@ -86,7 +91,7 @@ public class AtmView {
 	/**
 	 * Verifica o numero da conta e o numero do pin.
 	 * @return O objeto conta.
-	 * @throws IOException Um erro lançado pelo uso do BufferedReader.
+	 * @throws IOException Um erro lanï¿½ado pelo uso do BufferedReader.
 	 */
 	private Account requestAndVerifyPinAndAccountNumber() throws IOException {
 		AtmUtil.showMessage("Insira o numero da sua conta: ");
@@ -94,17 +99,16 @@ public class AtmView {
 		AtmUtil.showMessage("Insira o numero do pin: ");
 		final String pinNumber = buffered.readLine();
 		final Account account = new Account(accountNumber, pinNumber);
-		return controller.verifyCustomerAccount(account);
+		return dao.verifyCustomerAccount(account);
 	}
 	
 	/**
 	 * Abre o menu.
-	 * @throws IOException Erro lançado pelo uso do BufferedReader.
+	 * @throws IOException Erro lanï¿½ado pelo uso do BufferedReader.
 	 */
 	private void openMenu() throws IOException {
 		System.out.println(buildMenu());
 		final String option = buffered.readLine();
-		String screen = null;
 		
 		switch (option) {
 		case CONSULT:
@@ -181,7 +185,7 @@ public class AtmView {
 	 * @return O valor da conta do individuo.
 	 */
 	private BigDecimal executeConsultOperation() {
-		return controller.consult(account);
+		return dao.consult(account);
 	}
 	
 	/**
@@ -203,8 +207,8 @@ public class AtmView {
 	}
 	
 	/**
-	 * Implementa a lógica de saque.
-	 * @throws IOException Uma exceção do BufferedReader.
+	 * Implementa a lï¿½gica de saque.
+	 * @throws IOException Uma exceï¿½ï¿½o do BufferedReader.
 	 */
 	private void withDraw() throws IOException {
 		final Map<String, BigDecimal> map = new HashMap<>();
@@ -225,9 +229,9 @@ public class AtmView {
 				showInvalidOptionMessage();
 				withDraw();
 			} else {
-				final String result = controller.withDraw(account, value);
+				final String result = dao.withDraw(account, value);
 				if (verifyWithDraw(result))
-					AtmUtil.showMessage("Saque realizado com sucesso, não esqueça de retirar o seu dinheiro!");
+					AtmUtil.showMessage("Saque realizado com sucesso, nï¿½o esqueï¿½a de retirar o seu dinheiro!");
 				openMenu();
 			}
 		}
@@ -276,7 +280,7 @@ public class AtmView {
 			openMenu();
 		else {
 			final BigDecimal value = new BigDecimal(option);
-			controller.deposit(account, value);
+			dao.deposit(account, value);
 			AtmUtil.showMessage("Valor depositado com sucesso!");
 			openMenu();
 		}

@@ -1,4 +1,4 @@
-package br.umc.model;
+package br.umc.entity;
 
 import java.math.BigDecimal;
 

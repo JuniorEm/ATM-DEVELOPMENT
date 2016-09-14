@@ -3,8 +3,8 @@ package br.umc.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.umc.model.Account;
-import br.umc.model.Customer;
+import br.umc.entity.Account;
+import br.umc.entity.Customer;
 
 public class AtmData {
 	private static List<Customer> customers;

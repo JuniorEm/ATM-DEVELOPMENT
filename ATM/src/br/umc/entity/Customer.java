@@ -1,4 +1,4 @@
-package br.umc.model;
+package br.umc.entity;
 
 /**
  * Classe que representa o cliente

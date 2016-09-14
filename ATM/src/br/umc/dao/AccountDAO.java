@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Optional;
 
 import br.umc.data.AtmData;
-import br.umc.model.Account;
-import br.umc.model.Atm;
-import br.umc.model.AtmOperation;
+import br.umc.entity.Account;
+import br.umc.entity.Atm;
+import br.umc.entity.AccountOperation;
 
 /**
  * Classe que representa o acesso aos dados.
  * @author Junior
  *
  */
-public class AtmDAO implements AtmOperation {
+public class AccountDAO implements AccountOperation {
 	/**
 	 * Um modelo atm.
 	 */
@@ -25,7 +25,7 @@ public class AtmDAO implements AtmOperation {
 	 */
 	private static final BigDecimal DIVISOR = new BigDecimal("100");
 	
-	public AtmDAO() {
+	public AccountDAO() {
 		atm = new Atm();
 	}
 	
@@ -35,6 +35,7 @@ public class AtmDAO implements AtmOperation {
      * @param account O objeto conta.
      * @return Caso a operacao seja verdadeira ou falsa.
      */
+    @Override
     public Account verifyCustomerAccount(final Account account) {
     	final List<Account> accounts = AtmData.getAccounts();
     	    	
@@ -51,15 +52,15 @@ public class AtmDAO implements AtmOperation {
      * individuo que quer sacar, e verifica se o caixa possui uma quantidade para ser sacada
      * @param account O objeto conta.
      * @param value O valor a ser sacado.
-     * @return Uma string representando a numeração de cada status.
+     * @return Uma string representando a numeraï¿½ï¿½o de cada status.
      */
 	@Override
 	public String withDraw(final Account account, final BigDecimal value) {
-		if (verifyCustomerBalance(account, value) && verifyAtmBalance(value)) {
+		if (verifyAccountBalance(account, value) && verifyAtmBalance(value)) {
 			account.setBalance(account.getBalance().subtract(value));
 			atm.setCurrentBalance(atm.getCurrentBalance().subtract(value));
 			return "0";
-		} else if (verifyCustomerBalance(account, value)) {
+		} else if (verifyAccountBalance(account, value)) {
 			return "1";
 		}
 		return "2";
@@ -71,7 +72,7 @@ public class AtmDAO implements AtmOperation {
 	 * @param value O valor a ser sacado.
 	 * @return Um boolean caso a conta esteja apta a realizar saque ou nao.
 	 */
-	public boolean verifyCustomerBalance(final Account account, final BigDecimal value) {
+	public boolean verifyAccountBalance(final Account account, final BigDecimal value) {
 		return value.compareTo(account.getBalance()) <= 0;
 	}
 	
@@ -83,7 +84,17 @@ public class AtmDAO implements AtmOperation {
 	public boolean verifyAtmBalance(final BigDecimal value) {
 		return value.compareTo(atm.getCurrentBalance()) <= 0;
 	}
-
+        
+        /**
+         * Consulta o saldo da conta.
+         * @param account O objeto conta.
+         * @return O valor obtido.
+         */
+        public BigDecimal consult(final Account account) {
+            final Account obtained = verifyCustomerAccount(account);
+            return obtained.getBalance();
+        }
+            
 	/**
 	 * Realiza deposito.
 	 * @param account O objeto conta.
