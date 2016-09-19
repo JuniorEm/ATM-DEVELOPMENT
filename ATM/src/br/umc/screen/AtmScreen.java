@@ -1,4 +1,4 @@
-package br.umc.view;
+package br.umc.screen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import br.umc.util.AtmUtil;
  * Tela do ATM.
  * @author 12141500872
  */
-public class AtmView {
+public class AtmScreen {
     
 	/**
 	 * Um objeto conta.
@@ -57,7 +57,7 @@ public class AtmView {
 	 */
 	private static final String BACK = "6";
 	
-	public AtmView() {
+	public AtmScreen() {
                 dao = new AccountDAO();
 		buffered = new BufferedReaderFactory().getBufferedReader();
 		account = new Account();

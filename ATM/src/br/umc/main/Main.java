@@ -5,7 +5,7 @@
  */
 package br.umc.main;
 
-import br.umc.view.AtmView;
+import br.umc.screen.AtmScreen;
 
 /**
  * Classe que representa o metodo Main.
@@ -17,7 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new AtmView().openTerminal();
+        new AtmScreen().openTerminal();
     }
     
 }
